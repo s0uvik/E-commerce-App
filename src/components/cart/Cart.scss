@@ -1,0 +1,18 @@
+.cart{
+    background-color: white;
+    padding: 20px;
+}
+
+.cart_left{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .cart_left .product {
+    max-width: 300px;
+  }
+
+  .cart_header{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }

@@ -1,0 +1,21 @@
+body {
+  background-color: rgb(201, 201, 201);
+}
+
+.btn {
+  background-color: rgb(255, 216, 20);
+  border: none;
+  color: black;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.error {
+  color: red;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
