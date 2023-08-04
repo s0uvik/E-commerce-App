@@ -1,47 +1,66 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.scss";
 
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 import { Link } from "react-router-dom";
-import { globalContext } from "../Store/Context";
 import { auth } from "../../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { filterAction } from "../../redux-store/filter-slice";
 
 const Header = () => {
-  const [searchValue, setSearchvalue] = useState("");
+  const dispatch = useDispatch();
 
-  const {
-    state: { cart },
-    authState: { user },
-    filterState: { filterProducts },
-    filterDispatch,
-  } = useContext(globalContext);
-console.log(filterProducts)
-  const handleChange = (e) => {
-    setSearchvalue(e.target.value);
-    filterDispatch({
-      type: "SEARCH_QUERY",
-      payload: searchValue,
-    });
-  };
+  const cart = useSelector((state) => state.cart.cart);
+  const user = useSelector((state) => state.auth.user);
+  const searchQuary = useSelector((state) => state.filter.searchQuary);
+
   return (
     <div className="header">
-      <Link className="header_logo" to="/">
+      <Link
+        className="header_logo"
+        to="/"
+        onClick={() => {
+          document.title = "Amazon | home";
+        }}
+      >
         amazon<span style={{}}>.in</span>
       </Link>
 
       <div className="header_search">
-        <input type="text" value={searchValue} onChange={handleChange} />
-        <button
-          onClick={() => {
-            filterDispatch({
-              type: "SEARCH_QUERY",
-              payload: searchValue,
-            });
+        <select
+          name="cars"
+          className="header_filter"
+          onChange={(e) => {
+            return dispatch(filterAction.getFilterOption(e.target.value));
           }}
-          className="search_btn"
         >
+          <option className="header_filter_option" value="filterBy">
+            Filter By{" "}
+          </option>
+          <option className="header_filter_option" value="priceLowToHigh">
+            Price Low To High
+          </option>
+          <option className="header_filter_option" value="priceHighToLow">
+            Price High To Low
+          </option>
+          <option className="header_filter_option" value="highRating">
+            High Rating
+          </option>
+          <option className="header_filter_option" value="lowRating">
+            Low Rating
+          </option>
+        </select>
+        <input
+          type="text"
+          value={searchQuary}
+          placeholder="Search Amazon.in"
+          onChange={(e) => {
+            dispatch(filterAction.getSearchQuery(e.target.value));
+          }}
+        />
+        <button className="search_btn">
           <SearchOutlinedIcon />
         </button>
       </div>
@@ -61,7 +80,13 @@ console.log(filterProducts)
         </div>
       </div>
 
-      <Link to="/cart" className="header_optionCart header_option">
+      <Link
+        to="/cart"
+        className="header_optionCart header_option"
+        onClick={() => {
+          document.title = "Amazon | cart";
+        }}
+      >
         <span className="header_optionLineTwo">{cart.length}</span>
         <ShoppingCartOutlinedIcon />
       </Link>

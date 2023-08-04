@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
-import { globalContext } from "../Store/Context";
 
 const Login = () => {
   const [error, setError] = useState("");

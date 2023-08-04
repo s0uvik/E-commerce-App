@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
-import "./Product.scss";
-import { globalContext } from "../Store/Context";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const Product = ({ props }) => {
-  const {state: {cart}, dispatch } = useContext(globalContext);
+import "./Product.scss";
+import { cartAction } from "../../redux-store/cart-slice";
+
+const Product = ({ props, page }) => {
+  const cart = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
 
   return (
     <div className="product">
@@ -14,33 +17,34 @@ const Product = ({ props }) => {
           <strong>{props.price}</strong>
         </span>
         <div className="product_rating">
-          {/* {props.rating.rate}⭐ ({props.rating.count}) */}
+          {props.rating.rate}⭐ ({props.rating.count})
         </div>
       </div>
       <div className="product_image">
         <img src={props.image} alt="" />
       </div>
-      {cart.includes(props) ? (
-        <button
-          onClick={() => {
-            dispatch({
-              type: "REMOVE_FROM_CART",
-              payload: props,
-            });
-          }}
-          className="product_cart btn"
-        >
-          Remove From Cart
-        </button>
-      ) : (
-        <button  onClick={() => {
-          dispatch({
-            type: "ADD_TO_CART",
-            payload: props,
-          });
-        }} className="product_cart btn">
-          Add to Cart
-        </button>
+      {page !== "payment" && ( // In payment page we don't want remove from cart button
+        <div>
+          {cart.includes(props) ? (
+            <button
+              onClick={() => {
+                dispatch(cartAction.removeFromCart(props));
+              }}
+              className="product_cart btn"
+            >
+              Remove From Cart
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                dispatch(cartAction.addToCart(props));
+              }}
+              className="product_cart btn"
+            >
+              Add to Cart
+            </button>
+          )}
+        </div>
       )}
     </div>
   );
