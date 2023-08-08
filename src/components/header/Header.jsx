@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./Header.scss";
+import "./Header.css";
 
+import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
@@ -78,18 +79,17 @@ const Header = () => {
           <span className="header_optionLineOne">Returns</span>
           <span className="header_optionLineTwo">&&nbsp;Orders</span>
         </div>
+        <Link
+          to="/cart"
+          className="header_optionCart header_option"
+          onClick={() => {
+            document.title = "Amazon | cart";
+          }}
+        >
+          <span className="header_optionLineTwo">{cart.length}</span>
+          <ShoppingCartOutlinedIcon />
+        </Link>
       </div>
-
-      <Link
-        to="/cart"
-        className="header_optionCart header_option"
-        onClick={() => {
-          document.title = "Amazon | cart";
-        }}
-      >
-        <span className="header_optionLineTwo">{cart.length}</span>
-        <ShoppingCartOutlinedIcon />
-      </Link>
     </div>
   );
 };

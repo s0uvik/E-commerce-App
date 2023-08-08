@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./Cart.scss";
-import Product from "../../product/Product";
+import "./Cart.css";
+import CartProduct from "../../product/CartProduct";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { CardElement } from "@stripe/react-stripe-js";
 
-const Cart = () => {
+const Cart = ({ page, cardElement }) => {
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart);
@@ -20,31 +21,51 @@ const Cart = () => {
   }, [cart]);
 
   return (
-    <>
-      <div className="cart">
-        <div className="cart_header">
-          <h3>Welcome {user && user.displayName}</h3>
-          <h3>Total Amount: {total.toFixed(2)} </h3>
-          {Boolean(total) && (
+    <div className="cart">
+      {cart.length !== 0 ? (
+        <div className="cart-items">
+          {cart.map((item, index) => {
+            return <CartProduct props={item} key={index} page={page} />;
+          })}
+        </div>
+      ) : (
+        <h1 className="cart-items">Your cart in empty</h1>
+      )}
+
+      <div className="price-details">
+        <h2 style={{ padding: "10px" }}>Price Details</h2>
+        <hr />
+        <div className="price-details-item">
+          <p>Price ({cart.length} items)</p>
+          <p> ₹{total.toFixed()}</p>
+        </div>
+        <div className="price-details-item">
+          <p>Coupons for you:</p> <p>-50</p>
+        </div>
+        <div className="price-details-item">
+          <p>Delivery Charges</p> <p>50</p>
+        </div>
+        <h3 className="total price-details-item">
+          <p>Total amount</p> <p>₹{total.toFixed(2)}</p>
+        </h3>
+        <div className="button">
+          {page !== "payment" && (
             <button
               className="btn"
-              onClick={() => navigate(cart.length !== 0 ? "/payment" : "/")}
+              style={{ width: "200px" }}
+              onClick={() => {
+                navigate(cart.length !== 0 ? "/payment" : "/");
+                {
+                  cart.length === 0 && alert("Your cart in empty");
+                }
+              }}
             >
-              Order Now
+              Proceed to Payment
             </button>
           )}
         </div>
-        {cart.length !== 0 ? (
-          <div className="cart_left">
-            {cart.map((item, index) => {
-              return <Product props={item} key={index} />;
-            })}
-          </div>
-        ) : (
-          <h1>Your cart in empty</h1>
-        )}
       </div>
-    </>
+    </div>
   );
 };
 

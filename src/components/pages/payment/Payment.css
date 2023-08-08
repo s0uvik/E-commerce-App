@@ -1,0 +1,41 @@
+.delivery-address {
+  padding: 15px;
+  margin: 10px 40px;
+  background-color: white;
+}
+
+.delivery-address h2 {
+  margin-bottom: 10px;
+}
+
+.address-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-details {
+  width: 90%;
+  padding: 15px;
+  margin: 10px 40px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: -10px;
+}
+
+.card {
+  flex: 2;
+  width: 300px;
+}
+.payment-details div {
+  flex: 3;
+}
+.payment-details button {
+  flex: 1;
+}
+input {
+  border: none;
+  outline: none;
+}

@@ -1,7 +1,10 @@
 body {
   background-color: rgb(201, 201, 201);
 }
-
+* {
+  margin: 0;
+  padding: 0;
+}
 .btn {
   background-color: rgb(255, 216, 20);
   border: none;
@@ -13,9 +16,12 @@ body {
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
+  width: 150px;
 }
 .error {
   color: red;
   font-weight: 700;
   margin-bottom: 10px;
 }
+
+

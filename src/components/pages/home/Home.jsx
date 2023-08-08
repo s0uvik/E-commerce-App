@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../../../assets/banner.jpg";
-import "./Home.scss";
+import "./Home.css";
 import Product from "../../product/Product";
 import { useSelector } from "react-redux";
 
