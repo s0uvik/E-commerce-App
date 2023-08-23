@@ -6,6 +6,7 @@
 
 .cart-items {
   flex: 2;
+  
 }
 .price-details-container{
   border: 1px solid red;
@@ -39,5 +40,11 @@
 @media only screen and (max-width: 700px) {
   .cart {
     flex-direction: column;
+  }
+  .cart-items{
+    margin-right: 40px;
+  }
+  .price-details{
+    margin: auto;
   }
 }

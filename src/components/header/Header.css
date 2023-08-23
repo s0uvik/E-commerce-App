@@ -40,40 +40,7 @@
   margin-top: 10px;
 }
 
-.header_search {
-  display: flex;
-  flex: 1; /* this take rest of the space */
-  align-items: center;
-  border-radius: 7px;
-  overflow: hidden;
-  height: 65%;
-  margin-left: 10px;
-}
 
-.header_search input[type="text"] {
-  border: none;
-  font-size: 18px;
-  padding-top: 30px !important;
-}
-input:focus {
-  border: none;
-  outline: none;
-}
-
-.search_btn {
-  height: 100%;
-  width: 50px;
-  border: none;
-  background-color: rgb(254, 189, 105);
-  cursor: pointer;
-}
-.search_icon {
-  color: white;
-  font-size: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-right: 20px;
-}
 /* ---------------------------------------------------------------------- */
 
 .header_nav {

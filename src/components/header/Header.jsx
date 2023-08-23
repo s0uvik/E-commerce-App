@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
 import "./Header.css";
 
-import CloseIcon from "@mui/icons-material/Close";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { filterAction } from "../../redux-store/filter-slice";
+import { useSelector } from "react-redux";
+import SearchBox from "./searchBox/SearchBox";
 
 const Header = () => {
-  const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.auth.user);
-  const searchQuary = useSelector((state) => state.filter.searchQuary);
 
   return (
     <div className="header">
@@ -28,43 +22,8 @@ const Header = () => {
       >
         amazon<span style={{}}>.in</span>
       </Link>
-
-      <div className="header_search">
-        <select
-          name="cars"
-          className="header_filter"
-          onChange={(e) => {
-            return dispatch(filterAction.getFilterOption(e.target.value));
-          }}
-        >
-          <option className="header_filter_option" value="filterBy">
-            Filter By{" "}
-          </option>
-          <option className="header_filter_option" value="priceLowToHigh">
-            Price Low To High
-          </option>
-          <option className="header_filter_option" value="priceHighToLow">
-            Price High To Low
-          </option>
-          <option className="header_filter_option" value="highRating">
-            High Rating
-          </option>
-          <option className="header_filter_option" value="lowRating">
-            Low Rating
-          </option>
-        </select>
-        <input
-          type="text"
-          value={searchQuary}
-          placeholder="Search Amazon.in"
-          onChange={(e) => {
-            dispatch(filterAction.getSearchQuery(e.target.value));
-          }}
-        />
-        <button className="search_btn">
-          <SearchOutlinedIcon />
-        </button>
-      </div>
+      
+      <SearchBox name="searchBarInNav" />
 
       <div className="header_nav">
         <Link to={!user && "/login"} className="header_option">

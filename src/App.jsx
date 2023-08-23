@@ -12,6 +12,7 @@ import { auth } from "./firebase";
 import Signup from "./components/authentication/Signup";
 import Payment from "./components/pages/payment/Payment";
 import { authAction } from "./redux-store/auth-slice";
+import SearchBox from "./components/header/searchBox/SearchBox";
 
 const App = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -31,6 +32,9 @@ const App = () => {
   return (
     <>
       <Header />
+      <div className="mobile-search">
+        <SearchBox name="searchBarUnderNav" />
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />

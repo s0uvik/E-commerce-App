@@ -3,13 +3,13 @@ import "./Cart.css";
 import CartProduct from "../../product/CartProduct";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { CardElement } from "@stripe/react-stripe-js";
 
 const Cart = ({ page, cardElement }) => {
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart);
 
+  // dont delete bellow line
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
@@ -19,6 +19,13 @@ const Cart = ({ page, cardElement }) => {
       }, 0)
     );
   }, [cart]);
+
+  const handlePlaceOrder = (e) => {
+    e.preventDefault();
+    alert("Your order has been placed, Thankyou");
+
+    navigate("/");
+  };
 
   return (
     <div className="cart">
@@ -49,7 +56,7 @@ const Cart = ({ page, cardElement }) => {
           <p>Total amount</p> <p>₹{total.toFixed(2)}</p>
         </h3>
         <div className="button">
-          {page !== "payment" && (
+          {page !== "payment" ? (
             <button
               className="btn"
               style={{ width: "200px" }}
@@ -62,6 +69,8 @@ const Cart = ({ page, cardElement }) => {
             >
               Proceed to Payment
             </button>
+          ) : (
+            <button className="btn" onClick={handlePlaceOrder}>Place Order</button>
           )}
         </div>
       </div>

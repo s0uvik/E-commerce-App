@@ -5,6 +5,27 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.mobile-search {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #131921;
+  height: 60px;
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  width: 100vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .mobile-search {
+    display: flex;
+  }
+}
+
 .btn {
   background-color: rgb(255, 216, 20);
   border: none;
@@ -16,12 +37,10 @@ body {
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  width: 150px;
+  width: 175px;
 }
 .error {
   color: red;
   font-weight: 700;
   margin-bottom: 10px;
 }
-
-
