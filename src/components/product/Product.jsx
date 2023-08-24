@@ -3,15 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./Product.css";
 import { cartAction } from "../../redux-store/cart-slice";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ props, page }) => {
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleProductNavigate = () => {
+    navigate(`product/${props.id}`);
+  };
 
   return (
-    <div className="product">
+    <div className="product" onClick={handleProductNavigate}>
       <div className="product_image">
-        <img src={props.image} alt="" />
+        <img src={props.image} alt="product image" />
       </div>
       <div className="product_info">
         <p className="product_title"> {props.title}</p>
@@ -25,27 +31,7 @@ const Product = ({ props, page }) => {
         </div>
       </div>
 
-      <div>
-        {cart.includes(props) ? (
-          <button
-            onClick={() => {
-              dispatch(cartAction.removeFromCart(props));
-            }}
-            className="product_cart btn"
-          >
-            Remove From Cart
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              dispatch(cartAction.addToCart(props));
-            }}
-            className="product_cart btn"
-          >
-            Add to Cart
-          </button>
-        )}
-      </div>
+      
     </div>
   );
 };

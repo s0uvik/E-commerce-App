@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  console.log(products);
+  // console.log(products);
   const searchQuary = useSelector((state) => state.filter.searchQuary);
   const filterOption = useSelector((state) => state.filter.filterOption);
-  console.log(filterOption);
+  // console.log(filterOption);
   const fetchProduct = async () => {
     try {
       const res = await fetch("https://fakestoreapi.com/products");
@@ -25,6 +25,8 @@ const Home = () => {
     fetchProduct();
   }, []);
 
+
+  // filter products logic
   const transformProducts = () => {
     let filterProducts = products;
 
@@ -59,16 +61,13 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="home_container">
-        <img className="home_image" src={Banner} />
-
-        <div className="home_row">
+      <div className="home-container">
+        <img className="banner" src={Banner} />
+        <div className="products-listing">
           {transformProducts().map((item, index) => {
             return <Product props={item} key={index} />;
           })}
         </div>
-        <div className="home_row"></div>
-        <div className="home_row"></div>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import Signup from "./components/authentication/Signup";
 import Payment from "./components/pages/payment/Payment";
 import { authAction } from "./redux-store/auth-slice";
 import SearchBox from "./components/header/searchBox/SearchBox";
+import ProductDetails from "./components/pages/productDetails/ProductDetails";
 
 const App = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -41,10 +42,12 @@ const App = () => {
         <Route path="*" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route
           path="/payment"
           element={cart.length === 0 ? <Home /> : <Payment />}
         />
+        
       </Routes>
     </>
   );
